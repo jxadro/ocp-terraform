@@ -17,37 +17,37 @@
     "name": "bootstrap-0",
     "cpu": 4,
     "memory": 16384,
-    "ignition": "bootstrap.64"
+    "ignition": ""
   },
   {
     "name": "control-plane-0",
     "cpu": 4,
     "memory": 16384,
-    "ignition": "master-1.64"
+    "ignition": ""
   },
   {
     "name": "control-plane-1",
     "cpu": 4,
     "memory": 16384,
-    "ignition": "master-2.64"
+    "ignition": ""
   },
   {
     "name": "control-plane-2",
     "cpu": 4,
     "memory": 16384,
-    "ignition": "master-3.64"
+    "ignition": ""
   },
   {
     "name": "infra-0",
     "cpu": 8,
     "memory": 16384,
-    "ignition": "worker-4.64"
+    "ignition": ""
   },
   {
     "name": "infra-1",
     "cpu": 8,
     "memory": 16384,
-    "ignition": "worker-5.64"
+    "ignition": ""
   }
 ]
 }
