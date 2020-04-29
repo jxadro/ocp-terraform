@@ -79,15 +79,15 @@ resource "vsphere_virtual_machine" "vm" {
   name  = var.nodes[count.index].name
   folder= var.vsphere_folder
   
-  //en caso de tener un cluster con DSR activo y no usar Resource Pool:
+  //If you deploy the vm on a cluster with DSR active and not using Resource Pool
   //resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   
-  //en caso de usar resource pool
-  resource_pool_id = data.vsphere_resource_pool.pool.id
+  //If you deploy the vm on a resourcepool
+  //resource_pool_id = data.vsphere_resource_pool.pool.id
   
   
-  //en caso de no tener clusters e ir contra el host directamente:
-  //resource_pool_id = data.vsphere_host.host.resource_pool_id
+  //If you deploy the vm on a ESXi Host directly
+  resource_pool_id = data.vsphere_host.host.resource_pool_id
   
   datastore_id     = data.vsphere_datastore.ds.id
 
@@ -104,6 +104,8 @@ resource "vsphere_virtual_machine" "vm" {
   network_interface {
     network_id   = data.vsphere_network.network.id
     adapter_type = data.vsphere_virtual_machine.ocp_template.network_interface_types[0]
+    use_static_mac = true
+    mac_address = var.nodes[count.index].mac
   }
 
   disk {
