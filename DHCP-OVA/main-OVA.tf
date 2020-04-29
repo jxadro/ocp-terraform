@@ -24,7 +24,7 @@ data "vsphere_datacenter" "dc" {
 //  datacenter_id = "${data.vsphere_datacenter.dc.id}"
 //}
 
-en caso de deplegar las imágenes sobre un host directamente
+//en caso de deplegar las imágenes sobre un host directamente
 data "vsphere_host" "host" {
   name = var.vsphere_host
   datacenter_id = data.vsphere_datacenter.dc.id
