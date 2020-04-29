@@ -11,20 +11,20 @@ data "vsphere_datacenter" "dc" {
 }
 
 
-//en caso de deplegar las imágenes sobre un cluster con DSR activo y no usar Resource Pool
+//If you deploy the vm on a cluster with DSR active and not using Resource Pool
 //data "vsphere_compute_cluster" "cluster" {
 //  name          = var.vsphere_cluster
 //  datacenter_id = data.vsphere_datacenter.dc.id
 //}
 
 
-//en caso de deplegar las imágenes sobre un resource pool
+//If you deploy the vm on a resourcepool
 //data "vsphere_resource_pool" "pool" {
 //  name          = var.vsphere_resource_pool
 //  datacenter_id = "${data.vsphere_datacenter.dc.id}"
 //}
 
-//en caso de deplegar las imágenes sobre un host directamente
+//If you deploy the vm on a ESXi Host directly
 data "vsphere_host" "host" {
   name = var.vsphere_host
   datacenter_id = data.vsphere_datacenter.dc.id
