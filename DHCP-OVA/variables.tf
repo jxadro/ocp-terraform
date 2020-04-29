@@ -65,6 +65,7 @@ variable "nodes" {
     cpu = number
     memory = string
     ignition = string
+    mac = string
   }))
   description = "ignition in base64, in case of using isos the ignition content is not needed"
 }
