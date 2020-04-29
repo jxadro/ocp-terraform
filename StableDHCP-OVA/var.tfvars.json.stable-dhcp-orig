@@ -1,0 +1,57 @@
+{
+"vsphere_server": "169.47.232.218",
+"vsphere_user": "administrator@vsphere.local",
+"vsphere_password": "<your password>",
+"vsphere_datacenter": "Datacenter1",
+"vsphere_host": "169.47.226.74",
+"vsphere_cluster": "",
+"vsphere_datastore": "datastore1",
+"vsphere_folder": "ocp",
+"ocp_template_name": "RHCOS",
+"vsphere_network": "pfSense",
+"nodes": 
+[
+  {
+    "name": "bootstrap-0",
+    "cpu": 4,
+    "memory": 16384,
+    "ignition": "bootstrap.64"
+  },
+  {
+    "name": "control-plane-0",
+    "cpu": 4,
+    "memory": 16384,
+    "ignition": "master.64"
+  },
+  {
+    "name": "control-plane-1",
+    "cpu": 4,
+    "memory": 16384,
+    "ignition": "master.64"
+  },
+  {
+    "name": "control-plane-2",
+    "cpu": 4,
+    "memory": 16384,
+    "ignition": "master.64"
+  },
+  {
+    "name": "infra-0",
+    "cpu": 8,
+    "memory": 16384,
+    "ignition": "worker.64"
+  },
+  {
+    "name": "infra-1",
+    "cpu": 8,
+    "memory": 16384,
+    "ignition": "worker.64"
+  },
+  {
+    "name": "worker-0",
+    "cpu": 8,
+    "memory": 16384,
+    "ignition": "worker.64"
+  }
+]
+}
