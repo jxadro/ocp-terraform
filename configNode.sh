@@ -1,24 +1,26 @@
 #!/bin/sh
 
-IPS=("192.168.1.3" "192.168.1.4" "192.168.1.5" "192.168.1.6" "192.168.1.7" "192.168.1.8" "192.168.1.8")
-names=("bootstrap-0" "control-plane-0" "control-plane-1" "control-plane-2" "infra-0" "infra-1" "worker-0")
-ignitions=("bootstrap" "master" "master" "master" "worker" "worker" "worker")
+HOSTS=("bootstrap-0_bootstrap_192.168.1.3" "control-plane-0_master_192.168.1.4" "control-plane-1_master_192.168.1.5" "control-plane-2_master_192.168.1.6" "infra-0_worker_192.168.1.7" "infra-1_worker_192.168.1.8" "worker-0_worker_192.168.1.9")
 mask="255.255.255.0"
 gateway="192.168.1.1"
 dns1="192.168.1.1"
 dns2="8.8.8.8"
 domain="cluster2.poc.com"
 
-i=0
-for ip in "${IPS[@]}"; do
 
-mkdir -p ../install/node-$i/etc/sysconfig/network-scripts/
+for host in "${HOSTS[@]}"; do
 
-cat <<EOF > ../install/node-$i/etc/sysconfig/network-scripts/ifcfg-ens192
+hname=$(echo $host | awk -F_ '{ print $1}')
+htype=$(echo $host | awk -F_ '{ print $2}')
+hip=$(echo $host | awk -F_ '{ print $3}')
+
+mkdir -p ../install/$hname/etc/sysconfig/network-scripts/
+
+cat <<EOF > ../install/$hname/etc/sysconfig/network-scripts/ifcfg-ens192
 DEVICE=ens192
 BOOTPROTO=none
 ONBOOT=yes
-IPADDR=$ip
+IPADDR=$hip
 NETMASK=$mask
 GATEWAY=$gateway
 DNS1=$dns1
@@ -27,30 +29,17 @@ DOMAIN=$domain
 DEFROUTE=yes
 IPV6INIT=no
 EOF
-	
-i=$(($i+1))
-done	
 
-i=0
-for name in "${names[@]}"; do
-
-hostname=$name.$domain
-cat <<EOF > .../install/node-$i/etc/hostname
+hostname=$hname.$domain	
+cat <<EOF > ../install/$hname/etc/hostname
 $hostname
 EOF
 
-i=$(($i+1))
-done
+filetranspile -i ../install/$htype.ign -f ../install/$hname -o ../install/$hname.ign
 
-i=0
-for ignition in "${ignitions[@]}"; do
-
-filetranspile -i ../install/$ignition.ign -f ../install/node-$i -o ../install/$ignition-$i.ign
-
-if [ $i != 0 ]; then
-base64 -w0 ../install/$ignition-$i.ign > ../install/$ignition-$i.64
+if [ $htype != "bootstrap" ]; then
+base64 -w0 ../install/$hname.ign > ../install/$hname.64
 fi
 
-
-i=$(($i+1))
 done	
+
