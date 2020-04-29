@@ -1,15 +1,14 @@
 #!/bin/sh
 
-DNS=60.85.201.4
-MASK=255.255.0.0
-ROUTER=60.85.0.1
-WEB='http:\/\/60.85.201.4:81'
-DOMAIN=ocp42cluster1.jordax.com
-ISO='/opt/ocp42/rhcos-4.3.8-x86_64-installer.x86_64.iso'
+DNS=192.168.1.2
+MASK=255.255.255.0
+ROUTER=192.168.1.1
+WEB='http:\/\/192.168.1.2:81'
+DOMAIN=cluster2.poc.com
+ISO='/opt/ocp4/rhcos-4.3.8-x86_64-installer.x86_64.iso'
 RAW=rhcos-4.3.8-x86_64-metal.x86_64.raw.gz
 
-
-HOSTS=("bootstrap-0_bootstrap_60.85.201.5" "control-plane-0_master_60.85.201.6" "control-plane-1_master_60.85.201.7" "control-plane-2_master_60.85.201.8" "infra-0_worker_60.85.201.9" "infra-1_worker_60.85.201.10" "worker-0_worker_60.85.201.11")
+HOSTS=("bootstrap-0_bootstrap_192.168.1.3" "control-plane-0_master_192.168.1.4" "control-plane-1_master_192.168.1.5" "control-plane-2_master_192.168.1.6" "infra-0_worker_192.168.1.7" "infra-1_worker_192.168.1.8" "worker-0_worker_192.168.1.9")
 
 mkdir /isos
 

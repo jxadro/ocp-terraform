@@ -11,24 +11,24 @@ data "vsphere_datacenter" "dc" {
 }
 
 
-//en caso de deplegar las imágenes sobre un cluster con DSR activo y no usar Resource Pool
+//If you deploy the vm on a cluster with DSR active and not using Resource Pool
 //data "vsphere_compute_cluster" "cluster" {
 //  name          = var.vsphere_cluster
 //  datacenter_id = data.vsphere_datacenter.dc.id
 //}
 
 
-//en caso de deplegar las imágenes sobre un resource pool
-data "vsphere_resource_pool" "pool" {
-  name          = var.vsphere_resource_pool
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
-//en caso de deplegar las imágenes sobre un host directamente
-//data "vsphere_host" "host" {
-//  name = var.vsphere_host
-//  datacenter_id = data.vsphere_datacenter.dc.id
+//If you deploy the vm on a resourcepool
+//data "vsphere_resource_pool" "pool" {
+//  name          = var.vsphere_resource_pool
+//  datacenter_id = "${data.vsphere_datacenter.dc.id}"
 //}
+
+//If you deploy the vm on a ESXi Host directly
+data "vsphere_host" "host" {
+  name = var.vsphere_host
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
 
 data "vsphere_datastore" "ds" {
   name          = var.vsphere_datastore
@@ -58,15 +58,15 @@ resource "vsphere_virtual_machine" "vm" {
   name  = var.nodes[count.index].name
   folder= var.vsphere_folder
   
-  //en caso de tener un cluster con DSR activo y no usar Resource Pool:
+  //If you deploy the vm on a cluster with DSR active and not using Resource Pool
   //resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   
-  //en caso de usar resource pool
-  resource_pool_id = data.vsphere_resource_pool.pool.id
+  //If you deploy the vm on a resourcepool
+  //resource_pool_id = data.vsphere_resource_pool.pool.id
   
   
-  //en caso de no tener clusters e ir contra el host directamente:
-  //resource_pool_id = data.vsphere_host.host.resource_pool_id
+  //If you deploy the vm on a ESXi Host directly
+  resource_pool_id = data.vsphere_host.host.resource_pool_id
   
   datastore_id     = data.vsphere_datastore.ds.id
 
