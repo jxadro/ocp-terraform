@@ -7,14 +7,14 @@ mask="255.255.255.0"
 gateway="192.168.1.1"
 dns1="192.168.1.1"
 dns2="8.8.8.8"
-domain="cluster2.jordax.com"
+domain="cluster2.poc.com"
 
 i=0
 for ip in "${IPS[@]}"; do
 
-mkdir -p install/node-$i/etc/sysconfig/network-scripts/
+mkdir -p ../install/node-$i/etc/sysconfig/network-scripts/
 
-cat <<EOF > install/node-$i/etc/sysconfig/network-scripts/ifcfg-ens192
+cat <<EOF > ../install/node-$i/etc/sysconfig/network-scripts/ifcfg-ens192
 DEVICE=ens192
 BOOTPROTO=none
 ONBOOT=yes
@@ -35,7 +35,7 @@ i=0
 for name in "${names[@]}"; do
 
 hostname=$name.$domain
-cat <<EOF > install/node-$i/etc/hostname
+cat <<EOF > .../install/node-$i/etc/hostname
 $hostname
 EOF
 
@@ -45,10 +45,10 @@ done
 i=0
 for ignition in "${ignitions[@]}"; do
 
-filetranspile -i install/$ignition.ign -f install/node-$i -o install/$ignition-$i.ign
+filetranspile -i ../install/$ignition.ign -f ../install/node-$i -o ../install/$ignition-$i.ign
 
 if [ $i != 0 ]; then
-base64 -w0 install/$ignition-$i.ign > install/$ignition-$i.64
+base64 -w0 ../install/$ignition-$i.ign > ../install/$ignition-$i.64
 fi
 
 
