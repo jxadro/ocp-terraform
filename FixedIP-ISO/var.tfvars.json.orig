@@ -1,14 +1,14 @@
 {
-"vsphere_server": "169.47.232.218",
+"vsphere_server": "vcenter.jordax.com",
 "vsphere_user": "administrator@vsphere.local",
-"vsphere_password": "<your password>",
+"vsphere_password": "n0r1t5@C",
 "vsphere_datacenter": "Datacenter1",
-"vsphere_host": "169.47.226.74",
+"vsphere_host": "169.48.182.34",
 "vsphere_cluster": "",
 "vsphere_datastore": "datastore1",
 "vsphere_folder": "ocp",
 "ocp_template_name": "RHCOS",
-"vsphere_network": "pfSense",
+"vsphere_network": "pfSensePrivate",
 "iso_folder": "isos",
 "vsphere_resource_pool": "",
 "nodes": 
