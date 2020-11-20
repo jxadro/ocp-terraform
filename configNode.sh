@@ -3,8 +3,7 @@
 HOSTS=("bootstrap-0_bootstrap_192.168.1.3" "control-plane-0_master_192.168.1.4" "control-plane-1_master_192.168.1.5" "control-plane-2_master_192.168.1.6" "infra-0_worker_192.168.1.7" "infra-1_worker_192.168.1.8" "worker-0_worker_192.168.1.9")
 mask="255.255.255.0"
 gateway="192.168.1.1"
-dns1="192.168.1.1"
-dns2="8.8.8.8"
+dns1="192.168.1.2"
 domain="cluster2.poc.com"
 
 
