@@ -122,9 +122,15 @@ resource "vsphere_virtual_machine" "vm" {
   vapp {
     properties = {
       "guestinfo.ignition.config.data" = var.nodes[count.index].ignition
-      "guestinfo.afterburn.initrd.network-kargs" = var.nodes[count.index].ipstring
+      
     }
   }
+  
+  extra_config = {
+    "guestinfo.afterburn.initrd.network-kargs" = var.nodes[count.index].ipstring
+  }
+  
+  
   
   wait_for_guest_net_timeout= -1
 }
