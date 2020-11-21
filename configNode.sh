@@ -23,7 +23,6 @@ IPADDR=$hip
 NETMASK=$mask
 GATEWAY=$gateway
 DNS1=$dns1
-DNS2=$dns2
 DOMAIN=$domain
 DEFROUTE=yes
 IPV6INIT=no
