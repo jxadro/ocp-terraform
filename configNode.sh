@@ -33,7 +33,7 @@ cat <<EOF > ../install/$hname/etc/hostname
 $hostname
 EOF
 
-filetranspile -i ../install/$htype.ign -f ../install/$hname -o ../install/$hname.ign
+podman run --rm -ti --volume /opt/ocp4:/srv:z docker.io/jxadro/filetranspiler:1.0 -i install/$htype.ign -f install/$hname -o install/$hname.ign
 
 if [ $htype != "bootstrap" ]; then
 base64 -w0 ../install/$hname.ign > ../install/$hname.64
